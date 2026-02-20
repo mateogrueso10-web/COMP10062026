@@ -15,6 +15,7 @@ $members = $stmt->fetchAll();
             <!-- Table headers -->
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Jersey Number</th>
             <th>Position</th>
             <th>Phone</th>
             <th>Email</th>
@@ -28,6 +29,7 @@ $members = $stmt->fetchAll();
             <!-- Display member details with htmlspecialchars to prevent XSS -->
             <td><?= htmlspecialchars($member['first_name']) ?></td>
             <td><?= htmlspecialchars($member['last_name']) ?></td>
+            <td><?= htmlspecialchars($member['jersey_number']) ?></td>
             <td><?= htmlspecialchars($member['position']) ?></td>
             <td><?= htmlspecialchars($member['phone']) ?></td>
             <td><?= htmlspecialchars($member['email']) ?></td>

@@ -19,10 +19,30 @@ include 'includes/header.php';
         <input type="text" name="last_name" id="last_name" class="form-control" required>
       </div>
 
+      <!-- Form fields for jersey number details -->
       <div class="mb-3">
-        <!-- Form fields for position details -->
-        <label for="position" class="form-label">Position</label>
-        <input type="text" name="position" id="position" class="form-control" required>
+        <label class="form-label">Jersey Number</label>
+        <input type="number" name="jersey_number" class="form-control" min="1" max="99" required>
+      </div>
+
+      <!-- Form fields for position details -->
+      <div class="mb-3">
+        <label class="form-label">Position</label>
+        <!-- Dropdown for position selection -->
+        <select name="position" class="form-select" required>
+          <!-- Options for different soccer positions -->
+          <option value="">Select Position</option>
+          <option value="Goalkeeper">Goalkeeper</option>
+          <option value="Right Back">Right Back</option>
+          <option value="Left Back">Left Back</option>
+          <option value="Center Back">Center Back</option>
+          <option value="Defensive Midfielder">Defensive Midfielder</option>
+          <option value="Central Midfielder">Central Midfielder</option>
+          <option value="Attacking Midfielder">Attacking Midfielder</option>
+          <option value="Right Winger">Right Winger</option>
+          <option value="Left Winger">Left Winger</option>
+          <option value="Striker">Striker</option>
+        </select>
       </div>
 
       <div class="mb-3">

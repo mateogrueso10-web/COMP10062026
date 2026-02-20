@@ -43,11 +43,28 @@ if (!$member) {
         <input type="text" name="last_name" class="form-control"
           value="<?= htmlspecialchars($member['last_name']) ?>" required>
       </div>
+      <!-- Form fields for jersey number details -->
+      <div class="mb-3">
+        <label class="form-label">Jersey Number</label>
+        <input type="number" name="jersey_number" class="form-control" min="1" max="99" 
+          value="<?= htmlspecialchars($member['jersey_number']) ?>" required>
+      </div>
 
       <div class="mb-3">
-        <label class="form-label">Position</label>
-        <input type="text" name="position" class="form-control"
-          value="<?= htmlspecialchars($member['position']) ?>" required>
+        <!-- Form fields for position details -->
+        <select name="position" class="form-select" required>
+        <!-- Dropdown for position selection with current value selected -->
+        <option value="Goalkeeper" <?= $member['position']=='Goalkeeper'?'selected':'' ?>>Goalkeeper</option>
+        <option value="Right Back" <?= $member['position']=='Right Back'?'selected':'' ?>>Right Back</option>
+        <option value="Left Back" <?= $member['position']=='Left Back'?'selected':'' ?>>Left Back</option>
+        <option value="Center Back" <?= $member['position']=='Center Back'?'selected':'' ?>>Center Back</option>
+        <option value="Defensive Midfielder" <?= $member['position']=='Defensive Midfielder'?'selected':'' ?>>Defensive Midfielder</option>
+        <option value="Central Midfielder" <?= $member['position']=='Central Midfielder'?'selected':'' ?>>Central Midfielder</option>
+        <option value="Attacking Midfielder" <?= $member['position']=='Attacking Midfielder'?'selected':'' ?>>Attacking Midfielder</option>
+        <option value="Right Winger" <?= $member['position']=='Right Winger'?'selected':'' ?>>Right Winger</option>
+        <option value="Left Winger" <?= $member['position']=='Left Winger'?'selected':'' ?>>Left Winger</option>
+        <option value="Striker" <?= $member['position']=='Striker'?'selected':'' ?>>Striker</option>
+        </select>
       </div>
 
       <div class="mb-3">
