@@ -1,45 +1,47 @@
 <?php
 include 'db.php';
-include 'includes/header.php';
 
-// Fetch all members
-$stmt = $pdo->query("SELECT * FROM members ORDER BY created_at DESC");
-$members = $stmt->fetchAll();
+// Server-side validation
+$first = trim($_POST['first_name']);
+$last = trim($_POST['last_name']);
+$position = trim($_POST['position']);
+$phone = trim($_POST['phone']);
+$email = trim($_POST['email']);
+$team = trim($_POST['team_name']);
+
+// Validate required fields
+if(empty($first) || empty($last) || empty($position) || empty($phone) || empty($email) || empty($team)){
+    die("All fields are required.");
+}
+
+// Validate email
+if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    die("Invalid email format.");
+}
+
+// Validate phone (10 digits)
+if(!preg_match('/^[0-9]{10}$/', $phone)){
+    die("Phone must be 10 digits.");
+}
+
+// reCAPTCHA verification
+$secretKey = "6LdHbHIsAAAAALMOcS_TUh7u7jKLl6CzHtPhQdz1";
+$responseKey = $_POST['g-recaptcha-response'];
+$userIP = $_SERVER['REMOTE_ADDR'];
+
+$url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$responseKey&remoteip=$userIP";
+$response = file_get_contents($url);
+$response = json_decode($response);
+
+if(!$response->success){
+    die("reCAPTCHA verification failed. Please try again.");
+}
+
+// Insert into database using prepared statement
+$stmt = $pdo->prepare("INSERT INTO members (first_name, last_name, position, phone, email, team_name) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->execute([$first, $last, $position, $phone, $email, $team]);
+
+// Redirect to index.php
+header("Location: index.php");
+exit();
 ?>
-
-<a href="add.php" class="btn btn-primary mb-3">Add New Member</a>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <!-- Table headers -->
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Position</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Team Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($members as $member): ?>
-            <!-- Display member data in table rows -->
-        <tr>
-            <td><?= htmlspecialchars($member['first_name']) ?></td>
-            <td><?= htmlspecialchars($member['last_name']) ?></td>
-            <td><?= htmlspecialchars($member['position']) ?></td>
-            <td><?= htmlspecialchars($member['phone']) ?></td>
-            <td><?= htmlspecialchars($member['email']) ?></td>
-            <td><?= htmlspecialchars($member['team_name']) ?></td>
-            <td>
-                <!-- Edit and Delete buttons -->
-                <a href="edit.php?id=<?= $member['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                <a href="delete.php?id=<?= $member['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<!-- Include footer -->
-<?php include 'includes/footer.php'; ?>
