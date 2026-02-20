@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $dbname = "team_tracker";
-$username = "mat";       // or your DB username
-$password = "mateo";           // or your DB password
+$username = "root";       // or your DB username
+$password = "";           // or your DB password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
