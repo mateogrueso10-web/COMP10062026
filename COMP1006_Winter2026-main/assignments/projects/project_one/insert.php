@@ -1,7 +1,12 @@
-if(empty($_POST['first_name'])) {
-    die("First name is required.");
-}
+$secretKey = 6LfoaXIsAAAAAKpf0UgEvFS3njX9vnOdUancruez;
+$responseKey = $_POST['g-recaptcha-response'];
+$userIP = $_SERVER['REMOTE_ADDR'];
 
-if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    die("Invalid email format.");
+$url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$responseKey&remoteip=$userIP";
+
+$response = file_get_contents($url);
+$response = json_decode($response);
+
+if(!$response->success){
+    die("reCAPTCHA verification failed. Please try again.");
 }
