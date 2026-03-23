@@ -1,6 +1,9 @@
 <?php
 require "connect.php";
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 $result = $conn->query("SELECT * FROM images ORDER BY uploaded_at DESC");
 ?>
 
