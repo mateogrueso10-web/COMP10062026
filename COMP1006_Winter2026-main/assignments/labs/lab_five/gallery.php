@@ -33,5 +33,9 @@ $result = $conn->query("SELECT * FROM images ORDER BY uploaded_at DESC");
 
 </div>
 
+<div class="text-center mt-4">
+        <a href="index.html" class="btn btn-secondary btn-lg">Go back to Upload Page</a>
+ </div>
+
 </body>
 </html>
