@@ -1,4 +1,6 @@
 <?php
+require "connect.php";
+
 if (isset($_POST['submit'])) {
 
     $targetDir = "uploads/";
@@ -28,6 +30,11 @@ if (isset($_POST['submit'])) {
             $targetFile = $targetDir . $fileName;
 
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+
+                // Insert into database
+                $stmt = $conn->prepare("INSERT INTO images (file_name, file_path) VALUES (?, ?)");
+                $stmt->bind_param("ss", $fileName, $targetFile);
+                $stmt->execute();
 
                 $message = "<div class='alert alert-success'>Upload Successful!</div>";
 
