@@ -28,6 +28,7 @@ $members = $stmt->fetchAll();
             <th>Phone</th>
             <th>Email</th>
             <th>Team Name</th>
+            <th>Player Image</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -42,6 +43,14 @@ $members = $stmt->fetchAll();
             <td><?= htmlspecialchars($member['phone']) ?></td>
             <td><?= htmlspecialchars($member['email']) ?></td>
             <td><?= htmlspecialchars($member['team_name']) ?></td>
+            <td>
+                <?php if($member['player_image']): ?>
+                    <img src="uploads/<?= htmlspecialchars($member['player_image']) ?>" alt="Player Image" width="100">
+                <?php else: ?>
+                    No Image
+                <?php endif; ?>
+            </td>
+            
             <td>
                 <!-- Edit and Delete buttons -->
                 <a href="edit.php?id=<?= $member['id'] ?>" class="btn btn-sm btn-warning">Edit</a>

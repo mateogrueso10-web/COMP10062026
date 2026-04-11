@@ -34,7 +34,7 @@ if (!$member) {
   <div class="card-body">
     <h2 class="card-title mb-4">Edit Team Member</h2>
 
-    <form action="update.php" method="POST">
+    <form action="update.php" method="POST" enctype="multipart/form-data">
 
       <!-- Hidden ID -->
       <input type="hidden" name="id" value="<?= $member['id'] ?>">
@@ -57,6 +57,15 @@ if (!$member) {
         <input type="number" name="jersey_number" class="form-control" min="1" max="99" 
           value="<?= htmlspecialchars($member['jersey_number']) ?>" required>
       </div>
+      <!-- Form field for player image -->
+      <div class="mb-3">
+        <label class="form-label">Player Image</label>
+        <input type="file" name="player_image" class="form-control">
+        <?php if($member['player_image']): ?>
+            <img src="uploads/<?= htmlspecialchars($member['player_image']) ?>" alt="Current Image" width="100" class="mt-2">
+        <?php endif; ?>
+      </div>
+
 
       <div class="mb-3">
         <!-- Form fields for position details -->

@@ -12,7 +12,7 @@ $team = trim($_POST['team_name']);
 $imageName = null;
 
 // Validate required fields
-if(empty($first) || empty($last) || empty($jersey) || empty($position) || empty($phone) || empty($email) || empty($team) || empty($imageName)){
+if(empty($first) || empty($last) || empty($jersey) || empty($position) || empty($phone) || empty($email) || empty($team)){
     die("All fields are required.");
 }
 

@@ -6,6 +6,9 @@ include 'db.php';
 
 // Get POST data
 $id = $_POST['id'];
+$stmt = $pdo->prepare("SELECT * FROM members WHERE id = ?");
+$stmt->execute([$id]);
+$member = $stmt->fetch();
 $first = trim($_POST['first_name']);
 $last = trim($_POST['last_name']);
 $jersey_number = trim($_POST['jersey_number']);
@@ -13,10 +16,10 @@ $position = trim($_POST['position']);
 $phone = trim($_POST['phone']);
 $email = trim($_POST['email']);
 $team = trim($_POST['team_name']);
-$imageName = trim($_POST['player_image']);
+$imageName = $member['player_image']; // keep old image
 
 // Validate
-if (empty($first) || empty($last) || empty($jersey_number) || empty($position) || empty($phone) || empty($email) || empty($team) || empty($imageName)) {
+if (empty($first) || empty($last) || empty($jersey_number) || empty($position) || empty($phone) || empty($email) || empty($team)) {
     die("All fields are required.");
 }
 
@@ -38,11 +41,9 @@ if (!filter_var($jersey_number, FILTER_VALIDATE_INT) || $jersey_number < 1 || $j
 
 // Handle file upload if image is provided
 if(isset($_FILES['player_image']) && $_FILES['player_image']['error'] == 0){
-
     $fileTmp = $_FILES['player_image']['tmp_name'];
     $fileName = $_FILES['player_image']['name'];
 
-    // Create unique filename
     $imageName = time() . "_" . basename($fileName);
 
     move_uploaded_file($fileTmp, "uploads/" . $imageName);
