@@ -1,14 +1,12 @@
 <?php
-$host = "localhost";
-$dbname = "team_tracker";
-$username = "root";       // or your DB username
-$password = "";           // or your DB password
+$host = "172.31.22.43";
+$user = "Mateo200655020";
+$password = "LWTPoqn5W1";
+$database = "Mateo200655020";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    // Set PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+$conn = new mysqli($host, $user, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
