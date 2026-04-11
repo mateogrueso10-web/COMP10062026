@@ -13,9 +13,10 @@ $position = trim($_POST['position']);
 $phone = trim($_POST['phone']);
 $email = trim($_POST['email']);
 $team = trim($_POST['team_name']);
+$imageName = trim($_POST['player_image']);
 
 // Validate
-if (empty($first) || empty($last) || empty($jersey_number) || empty($position) || empty($phone) || empty($email) || empty($team)) {
+if (empty($first) || empty($last) || empty($jersey_number) || empty($position) || empty($phone) || empty($email) || empty($team) || empty($imageName)) {
     die("All fields are required.");
 }
 
@@ -29,19 +30,32 @@ if (!preg_match('/^[0-9]{10}$/', $phone)) {
     die("Phone must be 10 digits.");
 }
 
+
 // Validate jersey number (positive integer)
 if (!filter_var($jersey_number, FILTER_VALIDATE_INT) || $jersey_number < 1 || $jersey_number > 99) {
     die("Jersey number must be between 1 and 99.");
 }
 
+// Handle file upload if image is provided
+if(isset($_FILES['player_image']) && $_FILES['player_image']['error'] == 0){
+
+    $fileTmp = $_FILES['player_image']['tmp_name'];
+    $fileName = $_FILES['player_image']['name'];
+
+    // Create unique filename
+    $imageName = time() . "_" . basename($fileName);
+
+    move_uploaded_file($fileTmp, "uploads/" . $imageName);
+}
+
 // Update using prepared statement
 $stmt = $pdo->prepare("
     UPDATE members
-    SET first_name = ?, last_name = ?, jersey_number = ?, position = ?, phone = ?, email = ?, team_name = ?
+    SET first_name = ?, last_name = ?, jersey_number = ?, position = ?, phone = ?, email = ?, team_name = ?, player_image = ?
     WHERE id = ?
 ");
 
-$stmt->execute([$first, $last, $jersey_number, $position, $phone, $email, $team, $id]);
+$stmt->execute([$first, $last, $jersey_number, $position, $phone, $email, $team, $imageName, $id]);
 
 header("Location: index.php");
 exit();

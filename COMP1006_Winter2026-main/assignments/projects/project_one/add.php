@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id'])){
   <div class="card-body">
     <h2 class="card-title mb-4">Add Team Member</h2>
 
-    <form action="insert.php" method="POST">
+    <form action="insert.php" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
         <!-- Form fields for first name details -->
         <label for="first_name" class="form-label">First Name</label>
@@ -69,6 +69,12 @@ if(!isset($_SESSION['user_id'])){
         <!-- Form fields for team name details -->
         <label for="team_name" class="form-label">Team Name</label>
         <input type="text" name="team_name" id="team_name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <!-- Form fields for player image upload -->
+        <label class="form-label">Player Image</label>
+        <input type="file" name="player_image" class="form-control" accept="image/*">
       </div>
 
       <!-- Google reCAPTCHA placeholder -->

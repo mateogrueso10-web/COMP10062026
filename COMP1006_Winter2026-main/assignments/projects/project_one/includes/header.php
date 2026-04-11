@@ -18,4 +18,8 @@
   </div>
 </nav>
 
+<?php if(isset($_SESSION['user_id'])): ?>
+  <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
+<?php endif; ?>
+
 <div class="container mt-4">
