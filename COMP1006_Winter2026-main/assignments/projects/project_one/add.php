@@ -79,7 +79,8 @@ if(!isset($_SESSION['user_id'])){
 
       <!-- Google reCAPTCHA placeholder -->
       <div class="mb-3">
-        <div class="g-recaptcha" data-sitekey="6LdHbHIsAAAAAIuNp2JvsFN4oBUFmzVjWEdBuM7f"></div>
+        <!-- Google reCAPTCHA widget -->
+        <div class="g-recaptcha" data-sitekey="6LdJs7csAAAAABE24Mi9XLEdargwaZWifngjMyHw"></div>
       </div>
 
       <button type="submit" class="btn btn-success">Add Member</button>

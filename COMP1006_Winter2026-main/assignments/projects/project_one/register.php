@@ -27,7 +27,7 @@ include 'includes/header.php';
 
       <!-- reCAPTCHA -->
       <div class="mb-3">
-        <div class="g-recaptcha" data-sitekey="6LdHbHIsAAAAAIuNp2JvsFN4oBUFmzVjWEdBuM7f"></div>
+        <div class="g-recaptcha" data-sitekey="6LdJs7csAAAAABE24Mi9XLEdargwaZWifngjMyHw"></div>
       </div>
 
       <button type="submit" class="btn btn-success w-100">

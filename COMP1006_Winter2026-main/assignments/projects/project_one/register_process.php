@@ -20,7 +20,7 @@ if(strlen($password) < 6){
 }
 
 // reCAPTCHA
-$secretKey = "6LdHbHIsAAAAALMOcS_TUh7u7jKLl6CzHtPhQdz1";
+$secretKey = "6LdJs7csAAAAAMpvE0PFBevIMsVk0L0pQRBtcwNu";
 $responseKey = $_POST['g-recaptcha-response'];
 $userIP = $_SERVER['REMOTE_ADDR'];
 

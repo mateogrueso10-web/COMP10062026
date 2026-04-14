@@ -44,7 +44,7 @@ if(isset($_FILES['player_image']) && $_FILES['player_image']['error'] == 0){
 }
 
 // reCAPTCHA verification
-$secretKey = "6LdHbHIsAAAAALMOcS_TUh7u7jKLl6CzHtPhQdz1";
+$secretKey = "6LdJs7csAAAAAMpvE0PFBevIMsVk0L0pQRBtcwNu";
 $responseKey = $_POST['g-recaptcha-response'];
 $userIP = $_SERVER['REMOTE_ADDR'];
 
