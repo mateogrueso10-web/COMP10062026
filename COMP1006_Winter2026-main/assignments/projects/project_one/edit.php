@@ -43,25 +43,25 @@ if (!$member) {
       <div class="mb-3">
         <label class="form-label">First Name</label>
         <input type="text" name="first_name" class="form-control"
-          value="<?= htmlspecialchars($member['first_name']) ?>" required>
+          value="<?= htmlspecialchars($member['first_name'] ?? '') ?>" required>
       </div>
         <!-- Repeat for other fields: last_name, position, phone, email, team_name -->
       <div class="mb-3">
         <label class="form-label">Last Name</label>
         <input type="text" name="last_name" class="form-control"
-          value="<?= htmlspecialchars($member['last_name']) ?>" required>
+          value="<?= htmlspecialchars($member['last_name'] ?? '') ?>" required>
       </div>
       <!-- Form fields for jersey number details -->
       <div class="mb-3">
         <label class="form-label">Jersey Number</label>
         <input type="number" name="jersey_number" class="form-control" min="1" max="99" 
-          value="<?= htmlspecialchars($member['jersey_number']) ?>" required>
+          value="<?= htmlspecialchars($member['jersey_number'] ?? '') ?>" required>
       </div>
       <!-- Form field for player image -->
       <div class="mb-3">
         <label class="form-label">Player Image</label>
         <input type="file" name="player_image" class="form-control">
-        <?php if($member['player_image']): ?>
+        <?php if(isset($_FILES['player_image']) && $_FILES['player_image']['error'] === 0): ?>
             <img src="uploads/<?= htmlspecialchars($member['player_image']) ?>" alt="Current Image" width="100" class="mt-2">
         <?php endif; ?>
       </div>
@@ -87,20 +87,20 @@ if (!$member) {
       <div class="mb-3">
         <label class="form-label">Phone</label>
         <input type="tel" name="phone" class="form-control"
-          value="<?= htmlspecialchars($member['phone']) ?>"
+          value="<?= htmlspecialchars($member['phone'] ?? '') ?>"
           pattern="[0-9]{10}" required>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" name="email" class="form-control"
-          value="<?= htmlspecialchars($member['email']) ?>" required>
+          value="<?= htmlspecialchars($member['email'] ?? '') ?>" required>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Team Name</label>
         <input type="text" name="team_name" class="form-control"
-          value="<?= htmlspecialchars($member['team_name']) ?>" required>
+          value="<?= htmlspecialchars($member['team_name'] ?? '') ?>" required>
       </div>
         <!-- Submit and Cancel buttons -->
       <button type="submit" class="btn btn-success">Update Member</button>

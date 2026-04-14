@@ -13,7 +13,7 @@ if(empty($email) || empty($password)){
 }
 
 // Find user
-$stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+$stmt = $pdo->prepare("SELECT * FROM members WHERE email = ?");
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 

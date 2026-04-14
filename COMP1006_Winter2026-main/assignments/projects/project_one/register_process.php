@@ -36,7 +36,7 @@ if(!$response->success){
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert user
-$stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO members (username, email, password) VALUES (?, ?, ?)");
 $stmt->execute([$username, $email, $hashedPassword]);
 
 // Redirect to login

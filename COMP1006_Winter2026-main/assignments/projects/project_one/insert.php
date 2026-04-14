@@ -4,6 +4,8 @@ include 'db.php';
 // Server-side validation
 $first = trim($_POST['first_name']);
 $last = trim($_POST['last_name']);
+$username = trim($_POST['username'] ?? ''); // Optional username for login
+$password = $_POST['password'] ?? ''; // Optional password for login
 $jersey = trim($_POST['jersey_number']);
 $position = trim($_POST['position']);
 $phone = trim($_POST['phone']);
@@ -15,6 +17,8 @@ $imageName = null;
 if(empty($first) || empty($last) || empty($jersey) || empty($position) || empty($phone) || empty($email) || empty($team)){
     die("All fields are required.");
 }
+
+
 
 // Validate email
 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -57,8 +61,8 @@ if(!$response->success){
 }
 
 // Insert into database using prepared statement
-$stmt = $pdo->prepare("INSERT INTO members (first_name, last_name, jersey_number, position, phone, email, team_name, player_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->execute([$first, $last, $jersey, $position, $phone, $email, $team, $imageName]);
+$stmt = $pdo->prepare("INSERT INTO members (first_name, last_name, username, password, jersey_number, position, phone, email, team_name, player_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([$first, $last, $username, $password, $jersey, $position, $phone, $email, $team, $imageName]);
 
 // Redirect to index.php
 header("Location: index.php");
